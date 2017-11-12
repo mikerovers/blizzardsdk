@@ -5,7 +5,8 @@
     "authors": [
         {
             "name": "Mike Rovers",
-            "email": "mikerovers97@gmail.com"
+            "email": "mikerovers97@gmail.com",
+            "role": "Developer"
         }
     ],
     "config": {
