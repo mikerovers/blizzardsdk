@@ -1,0 +1,31 @@
+{
+    "name": "mikerovers/blizzardsdk",
+    "description": "A custom SDK for the Blizzard API.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mike Rovers",
+            "email": "mikerovers97@gmail.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": ">=7.1",
+        "guzzlehttp/psr7": "^1.4",
+        "php-http/discovery": "^1.3",
+        "php-http/httplug": "^1.1",
+        "symfony/options-resolver": "^3.3"
+    },
+    "require-dev": {
+        "php-http/mock-client": "^1.0",
+        "phpunit/phpunit": "^6.3"
+    },
+    "autoload": {
+        "psr-4": { "MR\\BlizzardSdk\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "MR\\BlizzardSdk\\Test\\": "tests/src/" }
+    }
+}
