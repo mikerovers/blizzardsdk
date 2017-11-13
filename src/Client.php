@@ -4,11 +4,10 @@ namespace MR\BlizzardSdk;
 
 use GuzzleHttp\Psr7\Request;
 use Http\Client\HttpClient;
-use Psr\Http\Message\ResponseInterface;
 
 class Client
 {
-    const BASEURL = 'https://%s.api.battle.net/?%s&%s&apikey=%s';
+    const BASEURL = 'https://%s.api.battle.net/%s?%s';
 
     /**
      * @var HttpClient
@@ -38,30 +37,24 @@ class Client
      * @param array $requestParams
      * @param array $urlParams
      *
-     * @return array
+     * @return string
      */
-    public function performRequest(string $url, string $locale, array $requestParams = [], array $urlParams = []): array
+    public function performRequest(
+        string $url,
+        string $locale,
+        array $urlParams = [],
+        array $requestParams = []
+    ): string
     {
         $parameterString = $this->generateParameterString($urlParams);
-        $url = $this->generateUrl($url, $locale, $parameterString);
+        $url             = $this->generateUrl($locale, $url, $parameterString);
 
         $request = new Request('GET', $url, $requestParams);
         $result = $this->client->sendRequest($request);
 
-        return $this->parseResponse($result);
+        return $result->getBody()->getContents();
     }
 
-    /**
-     * @param ResponseInterface $response
-     *
-     * @return array
-     */
-    public function parseResponse(ResponseInterface $response): array
-    {
-        $result = json_decode($response->getBody()->getContents(), true);
-
-        return $result;
-    }
 
     /**
      * @param array $parameters
@@ -70,6 +63,8 @@ class Client
      */
     private function generateParameterString(array $parameters): string
     {
+        $parameters['apikey'] = $this->accessKey;
+
         return http_build_query($parameters);
     }
 
@@ -82,18 +77,10 @@ class Client
      */
     private function generateUrl(string $locale, string $url, string $parameters): string
     {
-        var_dump(sprintf(self::BASEURL,
-            $locale,
-            $url,
-            $parameters,
-            $this->accessKey
-        ));
-
         return sprintf(self::BASEURL,
             $locale,
             $url,
-            $parameters,
-            $this->accessKey
+            $parameters
         );
     }
 }

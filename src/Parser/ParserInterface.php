@@ -4,5 +4,5 @@ namespace MR\BlizzardSdk\Parser;
 
 interface ParserInterface
 {
-    public function fromArray(array $json);
+    public function fromArray(string $json);
 }
