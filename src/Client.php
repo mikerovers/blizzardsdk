@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class Client
 {
-    const BASEURL = 'https://%s.api.battle.net/%s?%s&apikey=%s';
+    const BASEURL = 'https://%s.api.battle.net/?%s&%s&apikey=%s';
 
     /**
      * @var HttpClient
@@ -82,6 +82,13 @@ class Client
      */
     private function generateUrl(string $locale, string $url, string $parameters): string
     {
+        var_dump(sprintf(self::BASEURL,
+            $locale,
+            $url,
+            $parameters,
+            $this->accessKey
+        ));
+
         return sprintf(self::BASEURL,
             $locale,
             $url,
