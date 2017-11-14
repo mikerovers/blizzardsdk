@@ -142,19 +142,19 @@ class Zone
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getNumPlayers(): int
+    public function getNumPlayers(): string
     {
         return $this->numPlayers;
     }
 
     /**
-     * @param int $numPlayers
+     * @param string $numPlayers
      *
      * @return Zone
      */
-    public function setNumPlayers(int $numPlayers): Zone
+    public function setNumPlayers(string $numPlayers): Zone
     {
         $this->numPlayers = $numPlayers;
 
