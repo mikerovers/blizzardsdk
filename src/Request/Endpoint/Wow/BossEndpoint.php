@@ -5,6 +5,7 @@ namespace MR\BlizzardSdk\Request\Endpoint\Wow;
 use MR\BlizzardSdk\Client;
 use MR\BlizzardSdk\Model\Collection;
 use MR\BlizzardSdk\Model\Wow\Boss;
+use MR\BlizzardSdk\Model\Wow\Pets\PetSpecie;
 use MR\BlizzardSdk\Parser\CollectionParser;
 use MR\BlizzardSdk\Parser\Wow\BossParser;
 

@@ -5,9 +5,11 @@ namespace MR\BlizzardSdk\Request\Endpoint\Wow;
 use MR\BlizzardSdk\Client;
 use MR\BlizzardSdk\Model\Collection;
 use MR\BlizzardSdk\Model\Wow\Pets\PetAbility;
+use MR\BlizzardSdk\Model\Wow\Pets\PetSpecie;
 use MR\BlizzardSdk\Parser\CollectionParser;
 use MR\BlizzardSdk\Parser\Wow\PetAbilityParser;
 use MR\BlizzardSdk\Parser\Wow\PetParser;
+use MR\BlizzardSdk\Parser\Wow\PetSpecieParser;
 
 class PetEndpoint
 {
@@ -38,6 +40,8 @@ class PetEndpoint
      */
     private $petAbilityParser;
 
+    private $petSpecieParser;
+
     /**
      * PetEndpoint constructor.
      * @param Client $client
@@ -50,6 +54,7 @@ class PetEndpoint
         $this->petParser = new PetParser();
         $this->petCollectionParser = new CollectionParser($this->petParser);
         $this->petAbilityParser = new PetAbilityParser();
+        $this->petSpecieParser = new PetSpecieParser();
     }
 
     /**
@@ -73,5 +78,18 @@ class PetEndpoint
         $result = $this->client->performRequest($url, $this->locale);
 
         return $this->petAbilityParser->fromArray($result);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return PetSpecie
+     */
+    public function getSpecieById(int $id): PetSpecie
+    {
+        $url = sprintf('%s/species/%s', self::PATH, $id);
+        $result = $this->client->performRequest($url, $this->locale);
+
+        return $this->petSpecieParser->fromArray($result);
     }
 }
