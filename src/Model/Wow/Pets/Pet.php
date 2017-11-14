@@ -1,5 +1,7 @@
 <?php
 
+namespace MR\BlizzardSdk\Model\Wow\Pets;
+
 class Pet
 {
     private $canBattle;
