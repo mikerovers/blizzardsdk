@@ -63,6 +63,10 @@ class PetEndpoint
         return $this->petCollectionParser->fromArray($result);
     }
 
+    /**
+     * @param int $id
+     * @return PetAbility
+     */
     public function getAbilityById(int $id): PetAbility
     {
         $url = sprintf('%s/ability/%s', self::PATH, $id);
