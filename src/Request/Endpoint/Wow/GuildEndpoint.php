@@ -44,8 +44,7 @@ class GuildEndpoint
      */
     public function get(string $realm, string $guildName): Guild
     {
-        // TODO Fix url encoding for urls with spaces.
-        $url = sprintf("%s/%s/%s", self::PATH, $realm, str_replace('+', '%20', urlencode($guildName)));
+        $url = sprintf("%s/%s/%s", self::PATH, $realm, rawurlencode($guildName));
 
         $result = $this->client->performRequest($url, $this->locale);
 
