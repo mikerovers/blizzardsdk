@@ -47,6 +47,8 @@ class Boss
 
     /**
      * @param string $name
+     *
+     * @return $this
      */
     public function setName(string $name)
     {
@@ -131,6 +133,8 @@ class Boss
     public function setAvailableInNormalMode(bool $availableInNormalMode): Boss
     {
         $this->availableInNormalMode = $availableInNormalMode;
+
+        return $this;
     }
 
     /**
