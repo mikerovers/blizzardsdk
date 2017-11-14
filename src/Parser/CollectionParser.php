@@ -28,7 +28,7 @@ class CollectionParser extends AbstractParser
         $objects = [];
         $data    = json_decode($json, true);
 
-        foreach ($data['bosses'] as $object) {
+        foreach (reset($data) as $object) {
             $object = $this->parser->fromArray(json_encode($object));
 
             $objects[] = $object;

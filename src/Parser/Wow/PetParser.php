@@ -1,32 +1,25 @@
 <?php
 
-namespace MR\BlizzardSdk\Parser;
+namespace MR\BlizzardSdk\Parser\Wow;
 
+use MR\BlizzardSdk\Model\Wow\Pets\Pet;
+use MR\BlizzardSdk\Parser\AbstractParser;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
-abstract class AbstractParser implements ParserInterface
+class PetParser extends AbstractParser
 {
     /**
-     * @return Serializer
+     * @param string $json
+     * @return Pet
      */
-    protected function getSerializer(): Serializer
+    public function fromArray(string $json): Pet
     {
-        return new Serializer($this->getNormalizers(), $this->getEncoders());
-    }
+        $pet = $this->getSerializer()->deserialize($json, Pet::class, 'json');
 
-    /**
-     * @return array
-     */
-    protected function getEncoders(): array
-    {
-        return [
-            new JsonEncoder()
-        ];
+        return $pet;
     }
 
     /**
