@@ -35,9 +35,9 @@ abstract class AbstractParser implements ParserInterface
     protected function getNormalizers(): array
     {
         return [
+            new ObjectNormalizer(null, null, null, new ReflectionExtractor()),
             new PropertyNormalizer(),
             new ArrayDenormalizer(),
-            new ObjectNormalizer(null, null, null, new ReflectionExtractor())
         ];
     }
 }
