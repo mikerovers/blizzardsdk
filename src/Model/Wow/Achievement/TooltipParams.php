@@ -1,6 +1,6 @@
 <?php
 
-namespace MR\BlizzardSdk\Model\Wow;
+namespace MR\BlizzardSdk\Model\Wow\Achievement;
 
 class TooltipParams
 {

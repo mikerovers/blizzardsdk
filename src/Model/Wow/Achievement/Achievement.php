@@ -1,6 +1,6 @@
 <?php
 
-namespace MR\BlizzardSdk\Model\Wow;
+namespace MR\BlizzardSdk\Model\Wow\Achievement;
 
 class Achievement
 {
@@ -9,11 +9,48 @@ class Achievement
     private $points;
     private $description;
     private $reward;
-    private $rewardItems;
+    private $rewardItems = [];
     private $icon;
     private $criteria = [];
     private $accountWide;
     private $factionId;
+
+    /**
+     * @param AchievementCriteria $criteria
+     *
+     * @return Achievement
+     */
+    public function addCriteria(AchievementCriteria $criteria): Achievement
+    {
+        $this->criteria[] = $criteria;
+
+        return $this;
+    }
+
+    /**
+     * @return AchievementCriteria[]
+     */
+    public function getCriteria(): array
+    {
+        return $this->criteria;
+    }
+
+    /**
+     * @param AchievementCriteria[] $criteria
+     *
+     * @return Achievement
+     */
+    public function setCriteria(array $criteria): Achievement
+    {
+        $this->criteria = $criteria;
+
+        return $this;
+    }
+
+    public function hasCriteria(): bool
+    {
+        return count($this->getCriteria()) > 0;
+    }
 
     /**
      * @return int
@@ -118,16 +155,20 @@ class Achievement
         return $this->rewardItems;
     }
 
+
     /**
-     * @param RewardItem[] $rewardItems
+     * @param RewardItem $rewardItem
+     *
      * @return Achievement
      */
-    public function setRewardItems(array $rewardItems): Achievement
+    public function addRewardItem(RewardItem $rewardItem): Achievement
     {
-        $this->rewardItems = $rewardItems;
+        var_dump('hey');
+        array_push($this->rewardItems, $rewardItem);
 
         return $this;
     }
+
 
     /**
      * @return string
@@ -144,25 +185,6 @@ class Achievement
     public function setIcon(string $icon): Achievement
     {
         $this->icon = $icon;
-
-        return $this;
-    }
-
-    /**
-     * @return AchievementCriteria[]
-     */
-    public function getCriteria(): array
-    {
-        return $this->criteria;
-    }
-
-    /**
-     * @param AchievementCriteria[] $criteria
-     * @return Achievement
-     */
-    public function setCriteria(array $criteria): Achievement
-    {
-        $this->criteria = $criteria;
 
         return $this;
     }
@@ -204,4 +226,6 @@ class Achievement
 
         return $this;
     }
+
+
 }
