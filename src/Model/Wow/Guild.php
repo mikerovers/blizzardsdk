@@ -11,21 +11,42 @@ class Guild
     private $level;
     private $side;
     private $achievementPoints;
+    private $emblem;
 
     /**
-     * @return \DateTime
+     * @return GuildEmblem
      */
-    public function getLastModified(): \DateTime
+    public function getEmblem(): GuildEmblem
+    {
+        return $this->emblem;
+    }
+
+    /**
+     * @param GuildEmblem $emblem
+     *
+     * @return Guild
+     */
+    public function setEmblem(GuildEmblem $emblem): Guild
+    {
+        $this->emblem = $emblem;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastModified(): int
     {
         return $this->lastModified;
     }
 
     /**
-     * @param \DateTime $lastModified
+     * @param int $lastModified
      *
      * @return Guild
      */
-    public function setLastModified(\DateTime $lastModified): Guild
+    public function setLastModified(int $lastModified): Guild
     {
         $this->lastModified = $lastModified;
 
