@@ -16,16 +16,17 @@
         "php": ">=7.1",
         "doctrine/cache": "^1.7",
         "guzzlehttp/psr7": "^1.4",
-        "jms/serializer": "^1.9",
         "php-http/discovery": "^1.3",
         "php-http/httplug": "^1.1",
         "symfony/property-access": "^3.3",
+        "symfony/property-info": "^3.3",
         "symfony/serializer": "^3.3",
         "symfony/yaml": "^3.3"
     },
     "require-dev": {
         "php-http/mock-client": "^1.0",
-        "phpunit/phpunit": "^6.3"
+        "phpunit/phpunit": "^6.3",
+        "php-http/guzzle6-adapter": "^1.1"
     },
     "autoload": {
         "psr-4": { "MR\\BlizzardSdk\\": "src/" }

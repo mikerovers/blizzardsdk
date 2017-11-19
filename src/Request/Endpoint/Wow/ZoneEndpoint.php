@@ -4,14 +4,13 @@ namespace MR\BlizzardSdk\Request\Endpoint\Wow;
 
 use MR\BlizzardSdk\Client;
 use MR\BlizzardSdk\Model\Collection;
-use MR\BlizzardSdk\Model\Wow\Boss;
-use MR\BlizzardSdk\Model\Wow\Pets\PetSpecie;
+use MR\BlizzardSdk\Model\Wow\Zone\Zone;
 use MR\BlizzardSdk\Parser\CollectionParser;
-use MR\BlizzardSdk\Parser\Wow\BossParser;
+use MR\BlizzardSdk\Parser\Wow\ZoneParser;
 
-class BossEndpoint
+class ZoneEndpoint
 {
-    const PATH = 'wow/boss';
+    const PATH = 'wow/zone';
 
     /**
      * @var Client
@@ -24,17 +23,18 @@ class BossEndpoint
     private $locale;
 
     /**
-     * @var BossParser
+     * @var ZoneParser
      */
-    private $bossParser;
+    private $zoneParser;
 
     /**
      * @var CollectionParser
      */
-    private $bossCollectionParser;
+    private $zoneCollectionParser;
 
     /**
-     * BossEndpoint constructor.
+     * ZoneEndpoint constructor.
+     *
      * @param Client $client
      * @param string $locale
      */
@@ -42,30 +42,28 @@ class BossEndpoint
     {
         $this->client               = $client;
         $this->locale               = $locale;
-        $this->bossParser           = new BossParser();
-        $this->bossCollectionParser = new CollectionParser($this->bossParser);
+        $this->zoneParser           = new ZoneParser();
+        $this->zoneCollectionParser = new CollectionParser($this->zoneParser);
     }
 
-    /**
-     * @return Collection
-     */
     public function getMasterList(): Collection
     {
         $url    = sprintf('%s/', self::PATH);
         $result = $this->client->performRequest($url, $this->locale);
 
-        return $this->bossCollectionParser->fromArray($result);
+        return $this->zoneCollectionParser->fromArray($result);
     }
 
     /**
      * @param int $id
-     * @return Boss
+     *
+     * @return Zone
      */
-    public function get(int $id): Boss
+    public function get(int $id): Zone
     {
-        $url = sprintf('%s/%s', self::PATH, $id);
+        $url    = sprintf('%s/%s', self::PATH, $id);
         $result = $this->client->performRequest($url, $this->locale);
 
-        return $this->bossParser->fromArray($result);
+        return $this->zoneParser->fromArray($result);
     }
 }

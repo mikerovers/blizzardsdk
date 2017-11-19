@@ -7,6 +7,8 @@ use MR\BlizzardSdk\Model\Wow\Npc;
 use MR\BlizzardSdk\Parser\AbstractParser;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
 
 class BossParser extends AbstractParser
 {
@@ -36,5 +38,17 @@ class BossParser extends AbstractParser
         $boss->setNpcs($npcs);
 
         return $boss;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getNormalizers(): array
+    {
+        return [
+
+            new ArrayDenormalizer(),
+            new PropertyNormalizer(),
+        ];
     }
 }
