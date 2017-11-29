@@ -4,18 +4,23 @@ namespace MR\BlizzardSdk\Parser;
 
 use MR\BlizzardSdk\Model\Collection;
 
-class CollectionParser extends AbstractParser
+class SubCollectionParser extends CollectionParser
 {
-    protected $parser;
+    /**
+     * @var string
+     */
+    private $subCollection;
 
     /**
-     * CollectionParser constructor.
+     * SubCollectionParser constructor.
      *
      * @param ParserInterface $parser
+     * @param string $subCollection
      */
-    public function __construct(ParserInterface $parser)
+    public function __construct(ParserInterface $parser, string $subCollection)
     {
-        $this->parser = $parser;
+        parent::__construct($parser);
+        $this->subCollection = $subCollection;
     }
 
     /**
@@ -26,9 +31,10 @@ class CollectionParser extends AbstractParser
     public function fromArray(string $json): Collection
     {
         $objects = [];
-        $data    = json_decode($json, true);
+        $data = json_decode($json, true);
+        $data = $data[$this->subCollection];
 
-        foreach (reset($data) as $object) {
+        foreach ($data as $object) {
             $object = $this->parser->fromArray(json_encode($object));
 
             $objects[] = $object;
