@@ -6,6 +6,7 @@ use MR\BlizzardSdk\Client;
 use MR\BlizzardSdk\Model\Collection;
 use MR\BlizzardSdk\Model\Wow\Achievement\Achievement;
 use MR\BlizzardSdk\Parser\CollectionParser;
+use MR\BlizzardSdk\Parser\SubCollectionParser;
 use MR\BlizzardSdk\Parser\Wow\AchievementCollectionParser;
 use MR\BlizzardSdk\Parser\Wow\AchievementParser;
 
@@ -29,13 +30,6 @@ class AchievementEndpoint
     private $achievementParser;
 
     /**
-     * @var CollectionParser
-     */
-    private $achievementCollectionParser;
-
-    private $specialAchievementCollectionParser;
-
-    /**
      * AchievementEndpoint constructor.
      *
      * @param Client $client
@@ -46,8 +40,6 @@ class AchievementEndpoint
         $this->client = $client;
         $this->locale = $locale;
         $this->achievementParser = new AchievementParser();
-        $this->specialAchievementCollectionParser = new AchievementCollectionParser();
-        $this->achievementCollectionParser = new CollectionParser($this->specialAchievementCollectionParser);
     }
 
     /**
@@ -61,13 +53,5 @@ class AchievementEndpoint
         $result = $this->client->performRequest($url, $this->locale);
 
         return $this->achievementParser->fromArray($result);
-    }
-
-    public function getMasterList(): Collection
-    {
-        $url = sprintf('wow/data/character/achievements');
-        $result = $this->client->performRequest($url, $this->locale);
-
-        return $this->specialAchievementCollectionParser->fromArray($result);
     }
 }

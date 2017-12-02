@@ -6,6 +6,24 @@ class AchievementCollection
 {
     private $id;
     private $name;
+    private $achievements = [];
+
+    public function addAchievement(Achievement $achievement): AchievementCollection
+    {
+        $this->achievements[] = $achievement;
+
+        return $this;
+    }
+
+    public function hasAchievements(): bool
+    {
+        return count($this->achievements) > 0;
+    }
+
+    public function getAchievements(): array
+    {
+        return $this->achievements;
+    }
 
     /**
      * @return int
@@ -28,46 +46,6 @@ class AchievementCollection
     }
 
     /**
-     * @param Achievement $achievement
-     *
-     * @return AchievementCollection
-     */
-    public function addAchievement(Achievement $achievement): AchievementCollection
-    {
-        $this->achievements[] = $achievement;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasAchievements(): bool
-    {
-        return count($this->achievements) > 0;
-    }
-
-    /**
-     * @return Achievement[]
-     */
-    public function getAchievement(): array
-    {
-        return $this->achievements;
-    }
-
-    /**
-     * @param Achievement[] $achievements
-     *
-     * @return AchievementCollection
-     */
-    public function setAchievements(array $achievements): AchievementCollection
-    {
-        $this->achievements = $achievements;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getName(): string
@@ -83,5 +61,7 @@ class AchievementCollection
     public function setName(string $name): AchievementCollection
     {
         $this->name = $name;
+
+        return $this;
     }
 }
