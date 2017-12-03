@@ -31,7 +31,7 @@ class SubCollectionParser extends CollectionParser
     public function fromArray(string $json): Collection
     {
         $objects = [];
-        $data = json_decode($json, true);
+        $data = json_decode(trim($json), true);
         $data = $data[$this->subCollection];
 
         foreach ($data as $object) {

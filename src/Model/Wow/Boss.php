@@ -80,7 +80,7 @@ class Boss
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -220,7 +220,7 @@ class Boss
     /**
      * @return int
      */
-    public function getJournalId(): int
+    public function getJournalId(): ?int
     {
         return $this->journalId;
     }

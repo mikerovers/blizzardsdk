@@ -4,6 +4,7 @@ namespace MR\BlizzardSdk\Request\Endpoint\Wow;
 
 use MR\BlizzardSdk\Client;
 use MR\BlizzardSdk\Model\Collection;
+use MR\BlizzardSdk\Model\Wow\Realm;
 use MR\BlizzardSdk\Parser\CollectionParser;
 use MR\BlizzardSdk\Parser\Wow\RealmParser;
 
@@ -21,10 +22,22 @@ class RealmEndpoint
      */
     private $locale;
 
+    /**
+     * @var RealmParser
+     */
     private $realmParser;
 
+    /**
+     * @var CollectionParser
+     */
     private $realmCollectionParser;
 
+    /**
+     * RealmEndpoint constructor.
+     *
+     * @param Client $client
+     * @param string $locale
+     */
     public function __construct(Client $client, string $locale)
     {
         $this->client = $client;
@@ -33,11 +46,14 @@ class RealmEndpoint
         $this->realmCollectionParser = new CollectionParser($this->realmParser);
     }
 
-    public function getMasterList(): Collection
+    /**
+     * @return Realm[]
+     */
+    public function getMasterList(): array
     {
         $url = sprintf('%s', self::PATH);
         $result = $this->client->performRequest($url, $this->locale);
 
-        return $this->realmCollectionParser->fromArray($result);
+        return $this->realmCollectionParser->fromArray($result)->getItems();
     }
 }

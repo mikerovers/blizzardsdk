@@ -47,14 +47,14 @@ class BossEndpoint
     }
 
     /**
-     * @return Collection
+     * @return Boss[]
      */
-    public function getMasterList(): Collection
+    public function getMasterList(): array
     {
         $url    = sprintf('%s/', self::PATH);
         $result = $this->client->performRequest($url, $this->locale);
 
-        return $this->bossCollectionParser->fromArray($result);
+        return $this->bossCollectionParser->fromArray($result)->getItems();
     }
 
     /**
