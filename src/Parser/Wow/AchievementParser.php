@@ -19,15 +19,4 @@ class AchievementParser extends AbstractParser
 
         return $achievement;
     }
-
-    /**
-     * @return array
-     */
-    protected function getNormalizers(): array
-    {
-        return [
-            new ObjectNormalizer(null, null, null, new ReflectionExtractor()),
-            new ArrayDenormalizer()
-        ];
-    }
 }

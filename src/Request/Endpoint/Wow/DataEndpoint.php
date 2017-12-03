@@ -4,6 +4,7 @@ namespace MR\BlizzardSdk\Request\Endpoint\Wow;
 
 use MR\BlizzardSdk\Client;
 use MR\BlizzardSdk\Model\Collection;
+use MR\BlizzardSdk\Parser\CollectionParser;
 use MR\BlizzardSdk\Parser\SubCollectionParser;
 use MR\BlizzardSdk\Parser\Wow\AchievementCollectionParser;
 use MR\BlizzardSdk\Parser\Wow\AchievementParser;
@@ -66,7 +67,7 @@ class DataEndpoint
         $this->characterClassParser = new SubCollectionParser(new CharacterClassParser(), 'classes');
         $this->itemClassParser = new SubCollectionParser(new ItemClassParser(), 'classes');
         $this->petTypeParser = new SubCollectionParser(new PetTypeParser(), 'petTypes');
-        $this->achievementCollectionParser = new SubCollectionParser(new AchievementCollectionParser(), 'achievements');
+        $this->achievementCollectionParser = new CollectionParser(new AchievementCollectionParser());
     }
 
     public function getCharacterAchievements(): Collection

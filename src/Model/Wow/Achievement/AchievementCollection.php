@@ -8,6 +8,11 @@ class AchievementCollection
     private $name;
     private $achievements = [];
 
+    /**
+     * @param Achievement $achievement
+     *
+     * @return AchievementCollection
+     */
     public function addAchievement(Achievement $achievement): AchievementCollection
     {
         $this->achievements[] = $achievement;
@@ -15,11 +20,24 @@ class AchievementCollection
         return $this;
     }
 
+    public function setAchievements(Array $achievements): AchievementCollection
+    {
+        $this->achievements = $achievements;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
     public function hasAchievements(): bool
     {
         return count($this->achievements) > 0;
     }
 
+    /**
+     * @return Achievement[]
+     */
     public function getAchievements(): array
     {
         return $this->achievements;
