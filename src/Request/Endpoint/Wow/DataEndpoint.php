@@ -4,7 +4,10 @@ namespace MR\BlizzardSdk\Request\Endpoint\Wow;
 
 use MR\BlizzardSdk\Client;
 use MR\BlizzardSdk\Model\Collection;
+use MR\BlizzardSdk\Parser\CollectionParser;
 use MR\BlizzardSdk\Parser\SubCollectionParser;
+use MR\BlizzardSdk\Parser\Wow\AchievementCollectionParser;
+use MR\BlizzardSdk\Parser\Wow\AchievementParser;
 use MR\BlizzardSdk\Parser\Wow\Character\CharacterClassParser;
 use MR\BlizzardSdk\Parser\Wow\Character\CharacterRaceParser;
 use MR\BlizzardSdk\Parser\Wow\Data\BattlegroupParser;
@@ -50,6 +53,11 @@ class DataEndpoint
      */
     private $petTypeParser;
 
+    /**
+     * @var SubCollectionParser
+     */
+    private $achievementCollectionParser;
+
     public function __construct(Client $client, string $locale)
     {
         $this->client = $client;
@@ -59,6 +67,15 @@ class DataEndpoint
         $this->characterClassParser = new SubCollectionParser(new CharacterClassParser(), 'classes');
         $this->itemClassParser = new SubCollectionParser(new ItemClassParser(), 'classes');
         $this->petTypeParser = new SubCollectionParser(new PetTypeParser(), 'petTypes');
+        $this->achievementCollectionParser = new CollectionParser(new AchievementCollectionParser());
+    }
+
+    public function getCharacterAchievements(): Collection
+    {
+        $url = sprintf('%s/character/%s', self::PATH, 'achievements');
+        $result = $this->client->performRequest($url, $this->locale);
+
+        return $this->achievementCollectionParser->fromArray($result);
     }
 
     /**
