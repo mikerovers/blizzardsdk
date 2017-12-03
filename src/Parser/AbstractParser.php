@@ -36,8 +36,6 @@ abstract class AbstractParser implements ParserInterface
     {
         return [
             new ObjectNormalizer(null, null, null, new ReflectionExtractor()),
-            new ArrayDenormalizer(),
-            new PropertyNormalizer(),
         ];
     }
 }
