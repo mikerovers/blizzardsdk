@@ -6,7 +6,40 @@ class AchievementCollection
 {
     private $id;
     private $name;
+    private $categories = [];
     private $achievements = [];
+
+    /**
+     * @return AchievementCollection[]
+     */
+    public function getCategories(): array
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param AchievementCollection $achievementCollection
+     *
+     * @return AchievementCollection
+     */
+    public function addCategory(AchievementCollection $achievementCollection): AchievementCollection
+    {
+        $this->categories[] = $achievementCollection;
+
+        return $this;
+    }
+
+    /**
+     * @param AchievementCollection[] $categories
+     *
+     * @return array
+     */
+    public function setCategories(array $categories): AchievementCollection
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
 
     /**
      * @param Achievement $achievement

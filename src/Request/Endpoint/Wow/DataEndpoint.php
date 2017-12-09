@@ -4,6 +4,7 @@ namespace MR\BlizzardSdk\Request\Endpoint\Wow;
 
 use MR\BlizzardSdk\Client;
 use MR\BlizzardSdk\Model\Collection;
+use MR\BlizzardSdk\Model\Wow\Achievement\AchievementCollection;
 use MR\BlizzardSdk\Parser\CollectionParser;
 use MR\BlizzardSdk\Parser\SubCollectionParser;
 use MR\BlizzardSdk\Parser\Wow\AchievementCollectionParser;
@@ -70,12 +71,15 @@ class DataEndpoint
         $this->achievementCollectionParser = new CollectionParser(new AchievementCollectionParser());
     }
 
-    public function getCharacterAchievements(): Collection
+    /**
+     * @return AchievementCollection[]
+     */
+    public function getCharacterAchievements(): array
     {
         $url = sprintf('%s/character/%s', self::PATH, 'achievements');
         $result = $this->client->performRequest($url, $this->locale);
 
-        return $this->achievementCollectionParser->fromArray($result);
+        return $this->achievementCollectionParser->fromArray($result)->getItems();
     }
 
     /**

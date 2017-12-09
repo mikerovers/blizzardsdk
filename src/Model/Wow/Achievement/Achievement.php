@@ -131,7 +131,7 @@ class Achievement
     /**
      * @return string
      */
-    public function getReward(): string
+    public function getReward(): ?string
     {
         return $this->reward;
     }
